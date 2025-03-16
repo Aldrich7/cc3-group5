@@ -1,79 +1,77 @@
-print("Welcome to ABC Car Dealership!!\n")
+honda = 1000000
+toyota = 2000000
+aurelio = 3000000
+checker = 1
 
-toyota = 100000000
-ford = 500000000
-mclaren = 1000000000
-
-try:
-    carchoice = int(input("""CAR CHOICES:
-    1. TOYOTA = PHP 100,000,000
-    2. FORD = PHP 500,000,000
-    3. MCLAREN = PHP 1,000,000,000
+while checker == 1:
+    try:
+        print("WELCOME TO ABC DEALERSHIP")
+        car = int(input("""    CHOOSE YOUR CAR
+    1. Honda
+    2. Toyota
+    3. Aurelio
     
-    Enter here: """))
+CHOSEN CAR: """))
 
-    cashchoice = int(input("""\nCHOICES:
-    1. CASH
-    2. INSTALLMENT
+        if car >= 1 and car <= 3:
+            mop = int(input("""\n        CHOOSE MODE OF PAYMENT:
+    1. Cash (10% Discount)
+    2. Installment (5% Interest)
     
-    Enter here: """))
+CHOSEN PAYMENT: """))
 
-    if cashchoice == 1:
-        print("\nYou have picked Cash payment & you will receive a 10% discount for the car that you have chosen: ")
-        if carchoice == 1:
-            print("Car: Toyota")
-            print("")
-        elif carchoice == 2:
-            print("Car: Ford")
-            print("")
-        elif carchoice == 3:
-            print("Car: Mclaren")
-            print("")
+            try:
+                if mop == 1:  # cash payment
+                    if car == 1:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Honda ")
+                        print("Total amount: PHP", honda - (honda * 0.1))
+                        print("<=====RECEIPT=====>\n")
+                    elif car == 2:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Toyota ")
+                        print("Total amount: PHP", toyota - (toyota * 0.1))
+                        print("<=====RECEIPT=====>\n")
+                    elif car == 3:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Aurelio ")
+                        print("Total amount: PHP", aurelio - (aurelio * 0.1))
+                        print("<=====RECEIPT=====>\n")
 
-    elif cashchoice == 2:
-        print("\nYou have picked Installment: ")
-        installment = int(input("""How many months do you want to loan: 
-    1. 12 Months
-    2. 24 Months
-    3. 36 Months
-        
-    Enter here: """))
-        if installment == 1:
-            print("\nYou have picked 12 Months")
-            if carchoice == 1:
-                print("Car: Toyota")
-                print("")
-            elif carchoice == 2:
-                print("Car: Ford")
-                print("")
-            elif carchoice == 3:
-                print("Car: Mclaren")
-                print("")
-        elif installment == 2:
-            print("\nYou have picked 24 Months")
-            if carchoice == 1:
-                print("Car: Toyota")
-                print("")
-            elif carchoice == 2:
-                print("Car: Ford")
-                print("")
-            elif carchoice == 3:
-                print("Car: Mclaren")
-                print("")
-        elif installment == 2:
-            print("\nYou have picked 36 Months")
-            if carchoice == 1:
-                print("Car: Toyota")
-                print("")
-            elif carchoice == 2:
-                print("Car: Ford")
-                print("")
-            elif carchoice == 3:
-                print("Car: Mclaren")
-                print("")
+                elif mop == 2:  # installment payment
+                    raise Exception
+            except Exception:
+                months = int(input("""CHOOSE HOW MANY MONTHS: 12, 24 OR 36
+        CHOSEN MONTHS: """))
+                if months == 12 or months == 24 or months == 36:
+                    if car == 1:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Honda ")
+                        print("Total amount: PHP", honda + (honda * 0.05))
+                        print("Monthly payment: PHP", (honda + (honda * 0.05)) / months)
+                        print("<=====RECEIPT=====>\n")
+                    elif car == 2:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Toyota ")
+                        print("Total amount: PHP", toyota + (toyota * 0.05))
+                        print("Monthly payment: PHP", (toyota + (toyota * 0.05)) / months)
+                        print("<=====RECEIPT=====>\n")
+                    elif car == 3:
+                        print("\n<=====RECEIPT=====>")
+                        print("Chosen your car: Aurelio ")
+                        print("Total amount: PHP", aurelio + (aurelio * 0.05))
+                        print("Monthly payment: PHP", (aurelio + (aurelio * 0.05)) / months)
+                        print("<=====RECEIPT=====>\n")
+                else:
+                    print("Invalid input")
+        else:
+            print("Invalid input")
+        checker = int(input("""Do you still want to continue?
+    1. Yes
+    2. No
 
-except ValueError:
-    print("\nInvalid Input!! Try again!!")
-
-finally:
-    print("Thank you for vising ABC Car Dealership")
+Enter here: """))
+    except ValueError:
+        print("Invalid input")
+    finally:
+        print("\nThank you for visiting ABC Dealership!!\n")
