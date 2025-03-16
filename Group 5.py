@@ -41,8 +41,8 @@ CHOSEN PAYMENT: """))
                 elif mop == 2:  # installment payment
                     raise Exception
             except Exception:
-                months = int(input("""CHOOSE HOW MANY MONTHS: 12, 24 OR 36
-        CHOSEN MONTHS: """))
+                months = int(input("""\nCHOOSE HOW MANY MONTHS: 12, 24 OR 36
+    CHOSEN MONTHS: """))
                 if months == 12 or months == 24 or months == 36:
                     if car == 1:
                         print("\n<=====RECEIPT=====>")
@@ -63,15 +63,15 @@ CHOSEN PAYMENT: """))
                         print("Monthly payment: PHP", (aurelio + (aurelio * 0.05)) / months)
                         print("<=====RECEIPT=====>\n")
                 else:
-                    print("Invalid input")
+                    print("\nINVALID INPUT!!\n")
         else:
-            print("Invalid input")
+            print("\nINVALID INPUT!!\n")
         checker = int(input("""Do you still want to continue?
     1. Yes
     2. No
 
 Enter here: """))
     except ValueError:
-        print("Invalid input")
+        print("\nINVALID INPUT!!\n")
     finally:
         print("\nThank you for visiting ABC Dealership!!\n")
