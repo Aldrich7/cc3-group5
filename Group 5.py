@@ -41,35 +41,35 @@ while checker == 1:
                 carPrice = hondaCarsPrice[carChosen - 1]
             elif carBrand == 2:
                 carChosen = int(input(f"""    CHOOSE CAR MODEL (1-3)
-    1. Toyota Vios - PHP {toyotaCarsPrice[0]:,}
-    2. Toyota Fortuner - PHP {toyotaCarsPrice[1]:,}
-    3. Toyota Innova - PHP {toyotaCarsPrice[2]:,}
+        1. Toyota Vios - PHP {toyotaCarsPrice[0]:,}
+        2. Toyota Fortuner - PHP {toyotaCarsPrice[1]:,}
+        3. Toyota Innova - PHP {toyotaCarsPrice[2]:,}
     
-CHOSEN MODEL: """))
+    CHOSEN MODEL: """))
                 carPrice = toyotaCarsPrice[carChosen - 1]
             elif carBrand == 3:
                 carChosen = int(input(f"""    CHOOSE CAR MODEL (1-3)
-    1. Aurelio GT - PHP {aureliosCarsPrice[0]:,}
-    2. Aurelio RT - PHP {aureliosCarsPrice[1]:,}
-    3. Aurelio XT - PHP {aureliosCarsPrice[2]:,}
+        1. Aurelio GT - PHP {aureliosCarsPrice[0]:,}
+        2. Aurelio RT - PHP {aureliosCarsPrice[1]:,}
+        3. Aurelio XT - PHP {aureliosCarsPrice[2]:,}
     
-CHOSEN MODEL: """))
+    CHOSEN MODEL: """))
                 carPrice = aureliosCarsPrice[carChosen - 1]
             elif carBrand == 4:
                 carChosen = int(input(f"""    CHOOSE CAR MODEL (1-3)
-    1. Ford Ranger - PHP {fordCarsPrice[0]:,}
-    2. Ford Mustang - PHP {fordCarsPrice[1]:,}
-    3. Ford Explorer - PHP {fordCarsPrice[2]:,}
+        1. Ford Ranger - PHP {fordCarsPrice[0]:,}
+        2. Ford Mustang - PHP {fordCarsPrice[1]:,}
+        3. Ford Explorer - PHP {fordCarsPrice[2]:,}
     
-CHOSEN MODEL: """))
+    CHOSEN MODEL: """))
                 carPrice = fordCarsPrice[carChosen - 1]
             elif carBrand == 5:
                 carChosen = int(input(f"""    CHOOSE CAR MODEL (1-3)
-    1. Mitsubishi Mirage - PHP {MitsubishiCarsPrice[0]:,}
-    2. Mitsubishi Montero - PHP {MitsubishiCarsPrice[1]:,}
-    3. Mitsubishi Strada - PHP {MitsubishiCarsPrice[2]:,}
+        1. Mitsubishi Mirage - PHP {MitsubishiCarsPrice[0]:,}
+        2. Mitsubishi Montero - PHP {MitsubishiCarsPrice[1]:,}
+        3. Mitsubishi Strada - PHP {MitsubishiCarsPrice[2]:,}
     
-CHOSEN MODEL: """))
+    CHOSEN MODEL: """))
                 carPrice = MitsubishiCarsPrice[carChosen - 1]
             else:
                 print("Invalid input")
