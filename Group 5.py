@@ -245,6 +245,7 @@ CHOSEN PAYMENT: """))
                 print("\n<=======RECEIPT=======>")
                 print(f"Chosen your car: {carBrandName} {carModelsList[carChosen - 1]}")
                 print(f"Total amount: PHP {tupledPrice}")
+                print(f"Total months: {months}")
                 print(f"Monthly payment: PHP {tupledMonthlyPayment}")
                 print("<=======RECEIPT=======>\n")
             else:
