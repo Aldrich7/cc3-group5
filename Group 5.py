@@ -1,5 +1,4 @@
-#CAR BRANDS
-carBrands = ["Honda", "Toyota", "Aurelio", "Ford", "Mitsubishi", "BMW", "Mercedes", "Audi", "Chevrolet", "Nissan"]
+#CAR MODELS
 toyotaCars = ["Vios", "Fortuner", "Innova", "Corolla", "Camry", "Hilux", "Land Cruiser", "RAV4", "Yaris", "Avalon"]
 hondaCars = ["City", "Civic", "CRV", "Accord", "Jazz", "HR-V", "Pilot", "Odyssey", "Brio", "Passport"]
 aureliosCars = ["GT", "RT", "XT", "ST", "LT", "MT", "PT", "QT", "UT", "VT"]
@@ -11,8 +10,11 @@ audiCars = ["A3", "A4", "A6", "A8", "Q3", "Q5", "Q7", "Q8", "TT", "R8"]
 chevroletCars = ["Spark", "Malibu", "Impala", "Camaro", "Equinox", "Traverse", "Tahoe", "Suburban", "Blazer", "Trailblazer"]
 nissanCars = ["Micra", "Sunny", "Altima", "Maxima", "Juke", "Qashqai", "X-Trail", "Patrol", "GT-R", "370Z"]
 
-#CAR MODELS
+#CAR BRANDS
 carModels = [hondaCars, toyotaCars, aureliosCars, fordCars, MitsubishiCars, bmwCars, mercedesCars, audiCars, chevroletCars, nissanCars]
+carBrands = ["Honda", "Toyota", "Aurelio", "Ford", "Mitsubishi", "BMW", "Mercedes", "Audi", "Chevrolet", "Nissan"]
+
+#CAR PRICES
 toyotaCarsPrice = [2000000, 2500000, 3000000, 2200000, 2700000, 3200000, 3700000, 2400000, 1900000, 2800000]
 hondaCarsPrice = [1000000, 1500000, 2000000, 1800000, 1300000, 1700000, 2500000, 3000000, 900000, 2200000]
 aureliosCarsPrice = [3000000, 3500000, 4000000, 3200000, 3700000, 4200000, 4500000, 3800000, 3400000, 3600000]
@@ -23,7 +25,6 @@ mercedesCarsPrice = [3200000, 4200000, 5200000, 6200000, 3700000, 4700000, 57000
 audiCarsPrice = [3100000, 4100000, 5100000, 6100000, 3600000, 4600000, 5600000, 6600000, 7600000, 8600000]
 chevroletCarsPrice = [1500000, 2500000, 3500000, 4500000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000]
 nissanCarsPrice = [1400000, 2400000, 3400000, 4400000, 1900000, 2900000, 3900000, 4900000, 5900000, 6900000]
-
 
 checker = 1
 
