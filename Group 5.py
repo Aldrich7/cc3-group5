@@ -28,7 +28,7 @@ nissanCarsPrice = [1400000, 2400000, 3400000, 4400000, 1900000, 2900000, 3900000
 
 checker = 1
 
-while checker == 1:
+while checker == 1 or checker == 2:
     if checker == 2:
         break
     try:
@@ -201,16 +201,16 @@ CHOSEN MODEL: """))
 CHOSEN MODEL: """))
                 carPrice = nissanCarsPrice[carChosen - 1]
             else:
-                print("Invalid input")
+                print("\nInvalid Input!! Try again!!\n")
                 continue
         else:
-            print("Invalid input")
+            print("\nInvalid Input!! Try again!!\n")
             continue
 
         print(" ")
 
         if carChosen < 1 or carChosen > 10:
-            print("Invalid input")
+            print("\nInvalid Input!! Try again!!\n")
             continue
 
         mop = int(input("""     CHOOSE MODE OF PAYMENT:
@@ -219,7 +219,7 @@ CHOSEN MODEL: """))
     
 CHOSEN PAYMENT: """))
         if mop != 1 and mop != 2:
-            print("\nInvalid input\n")
+            print("\nInvalid Input!! Try again!!\n")
             continue
 
         try:
@@ -250,7 +250,7 @@ CHOSEN PAYMENT: """))
                 print(f"Monthly payment: PHP {tupledMonthlyPayment}")
                 print("<=======RECEIPT=======>\n")
             else:
-                print("Invalid input\n")
+                print("\nInvalid Input!! Try again!!\n")
                 continue
 
         checker = int(input("""Make another transaction?
@@ -258,8 +258,15 @@ CHOSEN PAYMENT: """))
     2. No
 
 Enter here: """))
+        if checker != 1 and checker != 2:
+            print("Invalid Input!!\n")
+            break
     except ValueError:
-        print("Invalid input\n")
-    finally:
+        print("\nInvalid Input!! Try again!!\n")
+        break
+    except IndexError:
+        print("\nInvalid Input!! Try again!!\n")
+        break
+    else:
         print("\nThank you for visiting ABC Dealership!!\n")
         continue
