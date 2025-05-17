@@ -23,18 +23,14 @@ car_data = {
 }
 
 class User:
-    # … your other methods stay the same …
-
     def choose_brand(self):
         print("   WELCOME TO ABC DEALERSHIP")
         print("   CHOOSE CAR BRAND:")
-        # Directly enumerate over the dict itself (iterating its keys):
         for idx, brand in enumerate(car_data, start=1):
             print(f"   {idx}. {brand}")
         try:
             choice = int(input("CHOSEN BRAND: "))
             if 1 <= choice <= len(car_data):
-                # No need to build a list; dict preserves insertion order in Python 3.7+
                 self.car_brand = list(car_data)[choice - 1]
             else:
                 raise ValueError
@@ -45,13 +41,11 @@ class User:
     def choose_model(self):
         models, prices = car_data[self.car_brand]
         print(f"\n   CHOOSE CAR MODEL FROM {self.car_brand}:")
-        # Use zip(models, prices) with enumerate to get both model & price plus an index
         for idx, (model, price) in enumerate(zip(models, prices), start=1):
             print(f"   {idx}. {self.car_brand} {model} - PHP {price:,}")
         try:
             choice = int(input("CHOSEN MODEL: "))
             if 1 <= choice <= len(models):
-                # Now simply index into the two lists
                 self.car_model, self.car_price = models[choice - 1], prices[choice - 1]
             else:
                 raise ValueError
