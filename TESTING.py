@@ -72,7 +72,7 @@ class User:
         self.cart = None
 
     def choose_brand(self):
-        print("WELCOME TO ABC DEALERSHIP")
+        print("\nWELCOME TO ABC DEALERSHIP")
         print("   CHOOSE CAR BRAND:")
         count = 1
         for brand in car_data:
