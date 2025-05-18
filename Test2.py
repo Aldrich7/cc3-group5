@@ -43,23 +43,27 @@ class Cart:
         if self.is_empty():
             print("Cart is empty.")
         else:
-            for idx, item in enumerate(self.items, start=1):
-                print(f"{idx}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
+            count = 1
+            for item in self.items:
+                print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
                 if item['payment_mode'] == "Installment":
                     monthly_payment = round(item['price'] / item['months'], 2)
                     print(f"   Installment Period: {item['months']} months")
                     print(f"   Monthly Payment: PHP {monthly_payment:,}")
+                count += 1
 
     def display_receipt(self):
         print("\n======== RECEIPT ========")
         total = 0
-        for idx, item in enumerate(self.items, start=1):
-            print(f"{idx}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
+        count = 1
+        for item in self.items:
+            print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
             if item['payment_mode'] == "Installment":
                 monthly_payment = round(item['price'] / item['months'], 2)
                 print(f"   Installment Period: {item['months']} months")
                 print(f"   Monthly Payment: PHP {monthly_payment:,}")
             total += item['price']
+            count += 1
         print(f"\nTotal Amount: PHP {total:,}")
         print("=========================\n")
 
@@ -70,8 +74,10 @@ class User:
     def choose_brand(self):
         print("WELCOME TO ABC DEALERSHIP")
         print("   CHOOSE CAR BRAND:")
-        for idx, brand in enumerate(car_data, start=1):
-            print(f"   {idx}. {brand}")
+        count = 1
+        for brand in car_data:
+            print(f"   {count}. {brand}")
+            count += 1
         try:
             choice = int(input("CHOSEN BRAND: "))
             if 1 <= choice <= len(car_data):
