@@ -22,12 +22,62 @@ car_data = {
                [1400000, 2400000, 3400000, 4400000, 1900000, 2900000, 3900000, 4900000, 5900000, 6900000])
 }
 
+class Cart:
+    def __init__(self):
+        self.items = []
+
+    def add(self, car_brand, car_model, car_price, payment_mode, months=None):
+        self.items.append({
+            "brand": car_brand,
+            "model": car_model,
+            "price": car_price,
+            "payment_mode": payment_mode,
+            "months": months
+        })
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def display(self):
+        print("\n======= CART =======\n")
+        if self.is_empty():
+            print("Cart is empty.")
+        else:
+            count = 1
+            for item in self.items:
+                print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
+                if item['payment_mode'] == "Installment":
+                    monthly_payment = round(item['price'] / item['months'], 2)
+                    print(f"   Installment Period: {item['months']} months")
+                    print(f"   Monthly Payment: PHP {monthly_payment:,}")
+                count += 1
+
+    def display_receipt(self):
+        print("\n======== RECEIPT ========")
+        total = 0
+        count = 1
+        for item in self.items:
+            print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
+            if item['payment_mode'] == "Installment":
+                monthly_payment = round(item['price'] / item['months'], 2)
+                print(f"   Installment Period: {item['months']} months")
+                print(f"   Monthly Payment: PHP {monthly_payment:,}")
+            total += item['price']
+            count += 1
+        print(f"\nTotal Amount: PHP {total:,}")
+        print("=========================\n")
+
 class User:
+    def __init__(self):
+        self.cart = None
+
     def choose_brand(self):
-        print("   WELCOME TO ABC DEALERSHIP")
+        print("\nWELCOME TO ABC DEALERSHIP")
         print("   CHOOSE CAR BRAND:")
-        for idx, brand in enumerate(car_data, start=1):
-            print(f"   {idx}. {brand}")
+        count = 1
+        for brand in car_data:
+            print(f"   {count}. {brand}")
+            count += 1
         try:
             choice = int(input("CHOSEN BRAND: "))
             if 1 <= choice <= len(car_data):
@@ -41,8 +91,8 @@ class User:
     def choose_model(self):
         models, prices = car_data[self.car_brand]
         print(f"\n   CHOOSE CAR MODEL FROM {self.car_brand}:")
-        for idx, (model, price) in enumerate(zip(models, prices), start=1):
-            print(f"   {idx}. {self.car_brand} {model} - PHP {price:,}")
+        for i in range(len(models)):
+            print(f"   {i+1}. {self.car_brand} {models[i]} - PHP {prices[i]:,}")
         try:
             choice = int(input("CHOSEN MODEL: "))
             if 1 <= choice <= len(models):
@@ -88,31 +138,43 @@ class User:
             print("Invalid Input! Try again.")
             self.choose_installment()
 
-    def display_receipt(self):
-        print("\n<=======RECEIPT=======>")
-        print(f"Chosen Car: {self.car_brand} {self.car_model}")
-        print(f"Total Amount: PHP {self.car_price:,}")
+    def add_to_cart(self):
         if self.payment_mode == "Installment":
-            monthly_payment = round(self.car_price / self.months, 2)
-            print(f"Installment Period: {self.months} months")
-            print(f"Monthly Payment: PHP {monthly_payment:,}")
-        print("<=======RECEIPT=======>\n")
+            self.cart.add(self.car_brand, self.car_model, self.car_price, self.payment_mode, self.months)
+        else:
+            self.cart.add(self.car_brand, self.car_model, self.car_price, self.payment_mode)
 
 def main():
+    cart = Cart()
     while True:
         user = User()
+        user.cart = cart
         user.choose_brand()
         user.choose_model()
         user.choose_payment()
-        user.display_receipt()
-        try:
-            another = int(input("Make another transaction? (1. Yes, 2. No): "))
-            if another != 1:
-                print("\nThank you for visiting ABC Dealership!")
-                break
-        except ValueError:
-            print("\nInvalid Input! Exiting.")
-            break
+        user.add_to_cart()
+        while True:
+            print("\n=====================")
+            print("\n1. Add another car")
+            print("2. View cart")
+            print("3. Checkout")
+            try:
+                action = int(input("CHOSEN ACTION: "))
+                if action == 1:
+                    break  # Add another car
+                elif action == 2:
+                    cart.display()
+                elif action == 3:
+                    if cart.is_empty():
+                        print("Cart is empty. Add a car first.")
+                    else:
+                        cart.display_receipt()
+                        print("\nThank you for visiting ABC Dealership!")
+                        return
+                else:
+                    print("Invalid Input! Try again.")
+            except ValueError:
+                print("Invalid Input! Try again.")
 
 if __name__ == "__main__":
     main()
