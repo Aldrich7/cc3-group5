@@ -67,6 +67,13 @@ class Cart:
         print(f"\nTotal Amount: PHP {total:,}")
         print("=========================\n")
 
+    def remove(self, index):
+        if 0 <= index < len(self.items):
+            removed = self.items.pop(index)
+            print(f"Removed {removed['brand']} {removed['model']} from cart.")
+        else:
+            print("Invalid car number.")
+
 class User:
     def __init__(self):
         self.cart = None
@@ -157,14 +164,25 @@ def main():
             print("\n=====================")
             print("\n1. Add another car")
             print("2. View cart")
-            print("3. Checkout")
+            print("3. Remove car from cart")
+            print("4. Checkout")
             try:
-                action = int(input("CHOSEN ACTION: "))
+                action = int(input("\nCHOSEN ACTION: "))
                 if action == 1:
                     break  # Add another car
                 elif action == 2:
                     cart.display()
                 elif action == 3:
+                    if cart.is_empty():
+                        print("Cart is empty. Nothing to remove.")
+                    else:
+                        cart.display()
+                        try:
+                            num = int(input("Enter car number to remove: "))
+                            cart.remove(num - 1)
+                        except ValueError:
+                            print("Invalid input.")
+                elif action == 4:
                     if cart.is_empty():
                         print("Cart is empty. Add a car first.")
                     else:
@@ -178,3 +196,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
