@@ -1,4 +1,5 @@
-# CAR MODELS, BRANDS, AND PRICES
+import pandas as pd
+
 car_data = {
     "Honda": (["City", "Civic", "CRV", "Accord", "Jazz", "HR-V", "Pilot", "Odyssey", "Brio", "Passport"],
               [1000000, 1500000, 2000000, 1800000, 1300000, 1700000, 2500000, 3000000, 900000, 2200000]),
@@ -22,6 +23,12 @@ car_data = {
                [1400000, 2400000, 3400000, 4400000, 1900000, 2900000, 3900000, 4900000, 5900000, 6900000])
 }
 
+brands = pd.Series(list(car_data.keys()))
+carDfMap = {
+    brand: pd.DataFrame({"Model": models, "Price": prices})
+    for brand, (models, prices) in car_data.items()
+}
+
 class Cart:
     def __init__(self):
         self.items = []
@@ -43,27 +50,23 @@ class Cart:
         if self.is_empty():
             print("Cart is empty.")
         else:
-            count = 1
-            for item in self.items:
+            for count, item in enumerate(self.items, 1):
                 print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
                 if item['payment_mode'] == "Installment":
                     monthly_payment = round(item['price'] / item['months'], 2)
                     print(f"   Installment Period: {item['months']} months")
                     print(f"   Monthly Payment: PHP {monthly_payment:,}")
-                count += 1
 
     def display_receipt(self):
         print("\n======== RECEIPT ========")
         total = 0
-        count = 1
-        for item in self.items:
+        for count, item in enumerate(self.items, 1):
             print(f"{count}. {item['brand']} {item['model']} - PHP {item['price']:,} ({item['payment_mode']})")
             if item['payment_mode'] == "Installment":
                 monthly_payment = round(item['price'] / item['months'], 2)
                 print(f"   Installment Period: {item['months']} months")
                 print(f"   Monthly Payment: PHP {monthly_payment:,}")
             total += item['price']
-            count += 1
         print(f"\nTotal Amount: PHP {total:,}")
         print("=========================\n")
 
@@ -81,14 +84,12 @@ class User:
     def choose_brand(self):
         print("\nWELCOME TO ABC DEALERSHIP")
         print("   CHOOSE CAR BRAND:")
-        count = 1
-        for brand in car_data:
-            print(f"   {count}. {brand}")
-            count += 1
+        for idx, brand in brands.items():
+            print(f"   {idx + 1}. {brand}")
         try:
-            choice = int(input("CHOSEN BRAND: "))
-            if 1 <= choice <= len(car_data):
-                self.car_brand = list(car_data)[choice - 1]
+            choice = int(input("\nCHOSEN BRAND: "))
+            if 1 <= choice <= len(brands):
+                self.car_brand = brands.iloc[choice - 1]
             else:
                 raise ValueError
         except ValueError:
@@ -96,14 +97,16 @@ class User:
             return self.choose_brand()
 
     def choose_model(self):
-        models, prices = car_data[self.car_brand]
-        print(f"\n   CHOOSE CAR MODEL FROM {self.car_brand}:")
-        for i in range(len(models)):
-            print(f"   {i+1}. {self.car_brand} {models[i]} - PHP {prices[i]:,}")
+        df = carDfMap[self.car_brand]
+        print(f"\nCHOOSE CAR MODEL FROM {self.car_brand}:")
+        for i, row in df.iterrows():
+            print(f"   {i + 1}. {self.car_brand} {row['Model']} - PHP {row['Price']:,}")
         try:
-            choice = int(input("CHOSEN MODEL: "))
-            if 1 <= choice <= len(models):
-                self.car_model, self.car_price = models[choice - 1], prices[choice - 1]
+            choice = int(input("\nCHOSEN MODEL: "))
+            if 1 <= choice <= len(df):
+                selected = df.iloc[choice - 1]
+                self.car_model = selected['Model']
+                self.car_price = selected['Price']
             else:
                 raise ValueError
         except ValueError:
@@ -111,11 +114,11 @@ class User:
             return self.choose_model()
 
     def choose_payment(self):
-        print("\n   CHOOSE MODE OF PAYMENT:")
+        print("\nCHOOSE MODE OF PAYMENT:")
         print("   1. Cash (10% Discount)")
         print("   2. Installment (5% Interest annually)")
         try:
-            choice = int(input("CHOSEN PAYMENT: "))
+            choice = int(input("\nCHOSEN PAYMENT: "))
             if choice == 1:
                 self.payment_mode = "Cash"
                 self.car_price = round(self.car_price * 0.90, 2)
@@ -130,10 +133,10 @@ class User:
             self.choose_payment()
 
     def choose_installment(self):
-        print("\n   CHOOSE INSTALLMENT PERIOD (MONTHS):")
-        print("   12, 24, or 36")
+        print("\nCHOOSE INSTALLMENT PERIOD (MONTHS):")
+        print("12, 24, or 36")
         try:
-            self.months = int(input("CHOSEN MONTHS: "))
+            self.months = int(input("\nCHOSEN MONTHS: "))
             if self.months in [12, 24, 36]:
                 annual_interest_rate = 0.05
                 total_interest = annual_interest_rate * (self.months / 12)
@@ -184,7 +187,7 @@ def main():
                             print("Invalid input.")
                 elif action == 4:
                     if cart.is_empty():
-                        print("Cart is empty. Add a car first.")
+                        print("Cart is empty. Add a car first!")
                     else:
                         cart.display_receipt()
                         print("\nThank you for visiting ABC Dealership!")
@@ -196,4 +199,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
